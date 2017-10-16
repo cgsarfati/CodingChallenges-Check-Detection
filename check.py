@@ -54,6 +54,11 @@ def check(king, queen):
     row, like "D6" and "B7":
     """
 
+    # insights: attacked (True) if
+        # vertical -- any 1-8 if same letter
+        # horizontol -- any A-H if same #
+        # diagonal -- diff b/w letter-to-letter and num-to-num is same
+
 
 if __name__ == '__main__':
     import doctest

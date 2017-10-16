@@ -46,6 +46,12 @@ False
 """
 
 
+def col_to_num(col):
+    """Turns A -> 1, B -> 2, etc."""
+
+    return {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8}[col]
+
+
 def check(king, queen):
     """Given a chessboard with one K and one Q, see if the K can attack the Q.
 
@@ -58,10 +64,23 @@ def check(king, queen):
         # vertical -- any 1-8 if same letter
         # horizontol -- any A-H if same #
         # diagonal -- diff b/w letter-to-letter and num-to-num is same
+            # take into account diff. directions of diagonals (abs. value needed)
+
+    # isolate row/col of K/Q
+    king_col = col_to_num(king[0])
+    king_row = int(king[1])
+    queen_col = col_to_num(queen[0])
+    queen_row = int(queen[1])
+
+    # vertical/horizontal check
+    if king_col == queen_col or king_row == queen_row:
+        return True
+
+    # diagonal check
+    return abs(king_col - queen_col) == abs(king_row - queen_row)
 
 
 if __name__ == '__main__':
     import doctest
     if doctest.testmod().failed == 0:
         print "\n*** ALL TESTS PASSED. EXCELLENT GAME!\n"
-
